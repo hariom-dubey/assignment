@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<!-- font awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- own style -->
+	<style type="text/css">
+        {% block internal-css %}
+          #copyright-custom{
+             background-color: #222222;
+             color:white;
+             position:fixed;
+             bottom: 0;
+             left:0;
+             width:100%;
+          }
+        {% endblock %}
+	</style>
+    <script type="text/javascript">
+        {% block script %}{% endblock %}
+    </script>
+	</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" style="font-family: lucida handwriting;" href="{% url 'app1:events' %}">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li {% block active-events %}{% endblock %}><a href="{% url 'app1:events' %}">&nbsp&nbspEvents</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li {% block active-add_event %}{% endblock %}><a href="{% url 'app1:add_event' %}"><i class="fa fa-plus"></i>&nbsp&nbspAdd Event</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% block body %}
+{% endblock %}
+
+<br>
+<br>
+  <!-- Copyright -->
+  <div class="text-center p-3" id="copyright-custom">
+    © 2021 Copyright: All rights reserved
+  </div>
+  <!-- Copyright -->
+</body>
+</html>

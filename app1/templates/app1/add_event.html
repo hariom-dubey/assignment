@@ -1,0 +1,74 @@
+{% extends 'app1/base.html' %}
+
+{% block active-add_event %}class="active"{% endblock %}
+
+{% block title%} Add Event {% endblock %}
+
+{% block internal-css %}
+  input[type="file"]{
+    border:none;
+    outline:none;
+    box-shadow:none;
+  }
+  input[type="file"]:hover{
+    outline:none;
+    border:none;
+    box-shadow:none;
+  }
+  label{
+    margin-top: 7px;
+  }
+  .en_name{
+    margin-top:0px;
+  }
+  #copyright-custom{
+    background-color: #222222;
+    color:white;
+    position:fixed;
+    bottom: 0;
+    left:0;
+    width:100%;
+  }
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 my-5">
+      <h3>Add a New Event</h3>
+      <br>
+      <form method="POST" action="{% url 'app1:add_event' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+        <div class="form-group row">
+          <label for="event_name" class="col-sm-2 col-form-label en_name">Event Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="ev_name" id="event_name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="data" class="col-sm-2 col-form-label">Data</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="data" id="data">
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <label for="location" class="col-sm-2 col-form-label">Location</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="loc" id="location">
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="img" class="col-sm-2 col-form-label">Image</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control" accept="image/*" name="img" id="img">
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

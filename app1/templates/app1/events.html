@@ -1,0 +1,69 @@
+{% extends 'app1/base.html' %}
+
+{% block active-events %}class="active"{% endblock %}
+
+{% block title %} Events {% endblock %}
+
+{% block internal-css %}
+    #copyright-custom{
+        background-color: #222222;
+        color:white;
+        position:fixed;
+        bottom: 0;
+        left:0;
+        width:100%;
+    }
+    .row{
+        background-color: #f5f5f5;
+        border-radius:5px;
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
+        height:130px;
+        width:65%;
+        margin: 0px 17% 0px 17%;
+    }
+    .col-sm-3{
+        padding:0px;
+    }
+    .col-sm-3 img{
+        height:130px;
+        width:100%;
+        border-radius:5px 0px 0px 5px;
+    }
+    .col-sm-8{
+        height:130px;
+    }
+    .col-sm-8 a{
+        text-decoration:none;
+        color:black;
+        cursor:pointer;
+    }
+{% endblock %}
+
+{% block body %}
+
+{% for message in messages %}
+    <p class="text-center font-weight-normal text-success bg-dark">{{message}}</p>
+{% endfor %}
+<div class="container">
+<br>
+    {% if events %}
+        {% for event in events %}
+            <div class="row">
+                <div class="col-sm-3 pl-0">
+                    <img src="{{ event.image.url }}" alt="Generic placeholder image">
+                </div>
+                <div class="col-sm-8">
+                    <h3 class="mt-0 mb-1">{{ event.event_name }}</h3>
+                    <h4>{{ event.data }}</h4>
+                    <br>
+                    <p><span>{{ event.time }}, </span><span>{{ event.location }}</span>
+                    <a href={% url 'app1:event_fav' event.id %} class="pull-right" {% if event.is_liked %} style="color:red;" {% endif %}><i class="fa fa-heart fa-lg"></i></a></p>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p class="text-center font-weight-normal text-warning bg-dark">No events to display. Click <a href="{% url 'app1:add_event' %}">here</a> to add</p>
+    {% endif %}
+</div>
+{% endblock %}
